@@ -110,7 +110,7 @@
     done
     ```
 
-# Chapter 9: Functions
+# Chapter 8: Functions
 
 - **$?**  
     gives the exit code of the last statement executed. It also gives you the exit code returned by the
@@ -144,6 +144,61 @@
     }
 
     NAME="Mohit Sharma"
-    hello NAME
+    # this causes word spliting
+    hello $NAME 
+
+    # No word splitting involved
+    hello "Mohit Sharma" 
+
+    # Using "" suppresses word splitting.
+    hello "$NAME" 
     ```
-    TODO: How to pass string with spaces as a single argument?
+
+    TODO: How to pass string with spaces as a single argument?   
+        Suppress word splitting (Always use `"$var"` for referring to variables)
+
+# Chapter 9: User Interfaces
+
+- Used to create interactive menus.
+
+    NOTE: This [link](https://www.shell-tips.com/bash/select-loop/) is useful for `select` statement.
+
+    ```
+    #!/bin/bash
+    select var in *; # Options are files in the current directory.
+    do
+        # This prints the actual string corresponding to choice
+        echo $var 
+
+        # This prints the use input (numeric choice)
+        echo $REPLY 
+    done
+    ```
+
+
+    ```
+    select var; # Options are the parameters to the script
+    do
+        # This prints the actual string corresponding to choice
+        echo $var 
+
+        # This prints the use input (numeric choice)
+        echo $REPLY 
+    done
+    ```
+
+    NOTE: Right now, I don't undertand how to read the options for select command from
+    the output of another program.
+
+# Chapter 10: Misc
+- `read`  
+   builtin is useful for reading user inputs. Word splitting happens for what is read from stdin.
+   Each individual word is assigned to the `NAMES` provided as the argument to the command, if more
+   words are available than the `NAMES` provided, last `NAME` holds all the leftover words.
+
+- `bc`  
+    It's much more than a simple builtin. It's a whole language to do arbitrary precision execution of arithematic statements.
+
+- `here string`  
+    Still don't understand what here strings are used for.
+
